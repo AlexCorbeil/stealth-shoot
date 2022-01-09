@@ -21,25 +21,39 @@ public class AlarmMode : MonoBehaviour {
         directionalLight.intensity = calmIntensity;
     }
 
-    //private void Update() {
-    //    TriggerAlarm();
-    //}
-
     public void TriggerAlarm() {
-        if (References.enemySpawner.isActivated) {
-            if (!isAlarmTriggered) {
-                DOTween.Kill(directionalLight);
-                directionalLight.color = alarmColor;
-                directionalLight.DOIntensity(alarmIntensity, 1f).SetLoops(-1, LoopType.Yoyo);
-                isAlarmTriggered = true;
-            }
-        }
-        else {
+        References.enemySpawner.isActivated = true;
+        if (!isAlarmTriggered) {
             DOTween.Kill(directionalLight);
-            directionalLight.color = calmColor;
-            directionalLight.intensity = calmIntensity;
-            isAlarmTriggered = false;
+            directionalLight.color = alarmColor;
+            directionalLight.DOIntensity(alarmIntensity, 1f).SetLoops(-1, LoopType.Yoyo);
+            isAlarmTriggered = true;
         }
+
+        //Old script
+        //if (References.enemySpawner.isActivated) {
+        //    if (!isAlarmTriggered) {
+        //        DOTween.Kill(directionalLight);
+        //        directionalLight.color = alarmColor;
+        //        directionalLight.DOIntensity(alarmIntensity, 1f).SetLoops(-1, LoopType.Yoyo);
+        //        isAlarmTriggered = true;
+        //    }
+        //}
+        //else {
+        //    Debug.Log("Does this ever get called?");
+        //    DOTween.Kill(directionalLight);
+        //    directionalLight.color = calmColor;
+        //    directionalLight.intensity = calmIntensity;
+        //    isAlarmTriggered = false;
+        //}
     }
 
+    public void DeactivateAlarm() {
+        print("Alarm deactivated!");
+        DOTween.Kill(directionalLight);
+        directionalLight.color = calmColor;
+        directionalLight.intensity = calmIntensity;
+        isAlarmTriggered = false;
+        References.enemySpawner.isActivated = false;
+    }
 }

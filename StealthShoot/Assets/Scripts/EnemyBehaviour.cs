@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.AI;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class EnemyBehaviour : MonoBehaviour
     protected Rigidbody rb;
     protected Vector3 playerPos;
     protected Vector3 vectorToPlayer;
+    protected NavMeshAgent enemyNavMeshAgent;
 
     protected virtual void Start() {
         rb = GetComponent<Rigidbody>();
+        enemyNavMeshAgent = GetComponent<NavMeshAgent>();
         playerObj = References.thePlayer;
     }
 
@@ -31,8 +34,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     protected void ChasePlayer() {
         if (playerObj != null) {
-            rb.velocity = vectorToPlayer.normalized * chaseSpeed;
-            transform.LookAt(playerPos);
+            enemyNavMeshAgent.SetDestination(playerPos);
+            
+            //rb.velocity = vectorToPlayer.normalized * chaseSpeed;
+            //transform.LookAt(playerPos);
         }
     }
 

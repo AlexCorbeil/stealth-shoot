@@ -11,6 +11,7 @@ public class GuardBehaviour : EnemyBehaviour {
     public float rotationSpeed;
     public bool alerted;
     public Light visionLight;
+    public GameObject alarmPanel;
     float detectionTimer = 0;
     float initRotSpeed;
 
@@ -28,7 +29,11 @@ public class GuardBehaviour : EnemyBehaviour {
 
     void PatrolMovement() {
         if (alerted) {
-            ChasePlayer();
+            if (!References.alarmMode.isAlarmTriggered) {
+                FindNearestAlarmPanel();
+            } else {
+                ChasePlayer();
+            }
         }
         else {
             SearchPlayer();
@@ -43,7 +48,6 @@ public class GuardBehaviour : EnemyBehaviour {
         //rb.velocity = transform.forward * speed;
 
         if (PlayerInSight()) {
-
             rotationSpeed = 0f;
             transform.LookAt(playerPos);
             DOTween.Kill(visionLight);
@@ -58,9 +62,9 @@ public class GuardBehaviour : EnemyBehaviour {
             detectionTimer += Time.deltaTime;
 
             if (detectionTimer >= detectionDuration) {
-                References.enemySpawner.isActivated = true;
+                //References.enemySpawner.isActivated = true;
                 alerted = true;
-                References.alarmMode.TriggerAlarm();
+                //References.alarmMode.TriggerAlarm();
             }
         }
         else {
@@ -76,6 +80,10 @@ public class GuardBehaviour : EnemyBehaviour {
                 }
             }
         }
+    }
+
+    void FindNearestAlarmPanel() {
+        enemyNavMeshAgent.SetDestination(alarmPanel.transform.position);
     }
 
     bool PlayerInSight() {

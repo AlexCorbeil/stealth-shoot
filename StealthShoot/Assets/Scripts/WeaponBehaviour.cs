@@ -21,7 +21,7 @@ public class WeaponBehaviour : MonoBehaviour
     public void FireBullet(Vector3 cursorPos) {        
         if(secondsSinceLastShot >= fireRate){
             //Trigger alarm when a bullet is shot
-            References.enemySpawner.isActivated = true;
+            //References.enemySpawner.isActivated = true;
             References.alarmMode.TriggerAlarm();
 
             for(int i = 0; i < numsOfProjectiles; i++) {

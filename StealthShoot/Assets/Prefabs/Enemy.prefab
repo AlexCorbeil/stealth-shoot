@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4282061850904066527}
   - component: {fileID: 5833154399052220261}
   - component: {fileID: 6625777477162669505}
+  - component: {fileID: 4204558569467467441}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -145,3 +146,25 @@ MonoBehaviour:
   maxHp: 2
   healthbarPrefab: {fileID: 1037522035934063488, guid: f04d3bf36814ee84092afe4f1d29ed58, type: 3}
   deathEffectPrefab: {fileID: 7315122173152886159, guid: 18f0bfe180d72084aa5d360e1ead5e8b, type: 3}
+--- !u!195 &4204558569467467441
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5089626861130156765}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
